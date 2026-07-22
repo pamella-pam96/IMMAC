@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services - Codinex Computers Limited</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        :root {
+            --primary: #0a3d6b; --primary-dark: #072a4a; --secondary: #00b4d8;
+            --white: #ffffff; --light-gray: #f8f9fa; --gray: #6c757d;
+            --dark: #1a1a2e; --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-hover: 0 20px 40px rgba(0,0,0,0.15); --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+        body { font-family: 'Inter', sans-serif; color: #333; line-height:1.7; background:#fff; }
+        a { text-decoration:none; color:inherit; }
+        ul { list-style:none; }
+        .container { max-width:1200px; margin:0 auto; padding:0 24px; }
+        .section-header { text-align:center; margin-bottom:48px; }
+        .section-tag {
+            display:inline-block; font-size:0.8rem; font-weight:600; text-transform:uppercase;
+            letter-spacing:2px; color:var(--secondary); background:rgba(0,180,216,0.1);
+            padding:4px 16px; border-radius:20px; margin-bottom:12px;
+        }
+        .section-header h2 { font-size:2.2rem; font-weight:800; color:var(--primary); margin-bottom:12px; }
+        .section-header p { font-size:1.1rem; color:var(--gray); max-width:600px; margin:0 auto; }
+        .highlight { color:var(--secondary); }
+        .btn {
+            display:inline-flex; align-items:center; gap:10px; padding:14px 32px;
+            border-radius:50px; font-weight:600; font-size:1rem; transition:var(--transition);
+            cursor:pointer; border:none;
+        }
+        .btn-primary { background:var(--primary); color:var(--white); }
+        .btn-primary:hover { background:var(--primary-dark); transform:translateY(-3px); box-shadow:var(--shadow-hover); }
+        .btn-large { padding:16px 40px; font-size:1.1rem; }
+
+        .header { background:#fff; box-shadow:0 2px 20px rgba(0,0,0,0.08); position:sticky; top:0; z-index:1000; padding:12px 0; }
+        .navbar { display:flex; justify-content:space-between; align-items:center; }
+        .logo a { display:flex; align-items:center; gap:10px; font-weight:800; font-size:1.5rem; color:var(--primary); }
+        .logo-icon { font-size:1.8rem; color:var(--primary); }
+        .logo-text { color:var(--primary); }
+        .nav-menu { display:flex; gap:32px; align-items:center; }
+        .nav-menu a { font-weight:500; color:#333; transition:var(--transition); position:relative; padding:4px 0; }
+        .nav-menu a::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px; background:var(--secondary); transition:var(--transition); }
+        .nav-menu a:hover::after, .nav-menu a.active::after { width:100%; }
+        .nav-menu a.active { color:var(--primary); font-weight:600; }
+        .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
+        .hamburger span { display:block; width:28px; height:3px; background:var(--primary); border-radius:2px; transition:var(--transition); }
+
+        .page-hero { padding:60px 0 40px; background:linear-gradient(135deg, var(--primary), var(--primary-dark)); color:#fff; text-align:center; }
+        .page-hero h1 { font-size:2.8rem; font-weight:800; margin-bottom:8px; }
+        .page-hero p { font-size:1.15rem; opacity:0.85; }
+
+        /* Services Grid - Blog Style */
+        .all-services { padding:80px 0; background:#fff; }
+        .services-grid-blog {
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(340px,1fr));
+            gap:30px;
+        }
+        .service-card-blog {
+            background:var(--light-gray);
+            border-radius:var(--radius);
+            overflow:hidden;
+            transition:var(--transition);
+        }
+        .service-card-blog:hover {
+            transform:translateY(-6px);
+            box-shadow:var(--shadow-hover);
+        }
+        .service-card-blog .service-image {
+            height:220px;
+            background-size:cover;
+            background-position:center;
+        }
+        .service-card-blog .service-content {
+            padding:24px;
+        }
+        .service-card-blog .service-icon {
+            font-size:2rem;
+            color:var(--secondary);
+            margin-bottom:10px;
+        }
+        .service-card-blog .service-content h3 {
+            font-size:1.2rem;
+            font-weight:700;
+            color:var(--primary);
+            margin-bottom:10px;
+        }
+        .service-card-blog .service-content p {
+            color:var(--gray);
+            font-size:0.95rem;
+            margin-bottom:12px;
+            display:-webkit-box;
+            -webkit-line-clamp:3;
+            -webkit-box-orient:vertical;
+            overflow:hidden;
+        }
+        .service-card-blog .service-features {
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px 16px;
+            margin-bottom:12px;
+        }
+        .service-card-blog .service-features li {
+            display:flex;
+            align-items:center;
+            gap:6px;
+            font-size:0.85rem;
+            color:#333;
+        }
+        .service-card-blog .service-features li i {
+            color:var(--secondary);
+            font-size:0.8rem;
+        }
+        .service-tag {
+            display:inline-block;
+            font-size:0.75rem;
+            font-weight:600;
+            text-transform:uppercase;
+            letter-spacing:1px;
+            background:rgba(0,180,216,0.15);
+            color:var(--secondary);
+            padding:2px 14px;
+            border-radius:20px;
+            margin-bottom:10px;
+        }
+
+        .why-choose { padding:80px 0; background:var(--light-gray); }
+        .why-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:30px; }
+        .why-item { text-align:center; background:#fff; padding:32px 20px; border-radius:var(--radius); transition:var(--transition); }
+        .why-item:hover { transform:translateY(-5px); box-shadow:var(--shadow); }
+        .why-item i { font-size:3rem; color:var(--secondary); margin-bottom:12px; }
+        .why-item h3 { font-size:1.1rem; font-weight:700; color:var(--primary); margin-bottom:8px; }
+        .why-item p { color:var(--gray); font-size:0.95rem; }
+
+        .cta-section { padding:60px 0; background:var(--light-gray); }
+        .cta-box { background:linear-gradient(135deg, var(--primary), var(--primary-dark)); padding:60px 40px; border-radius:var(--radius); text-align:center; color:#fff; }
+        .cta-box h2 { font-size:2.2rem; font-weight:800; margin-bottom:12px; }
+        .cta-box p { font-size:1.1rem; opacity:0.9; max-width:500px; margin:0 auto 24px; }
+        .cta-box .btn-primary { background:#fff; color:var(--primary); }
+        .cta-box .btn-primary:hover { background:var(--secondary); color:#fff; }
+
+        .footer { background:var(--dark); color:rgba(255,255,255,0.8); padding:60px 0 20px; }
+        .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1.5fr; gap:40px; margin-bottom:40px; }
+        .footer-about .logo { margin-bottom:16px; }
+        .footer-about .logo a { color:#fff; display:flex; align-items:center; gap:10px; }
+        .footer-about .logo img { height:40px; width:auto; }
+        .footer-about .logo .logo-text { color:#fff; font-weight:800; font-size:1.3rem; }
+        .footer-about p { font-size:0.95rem; line-height:1.7; margin-bottom:16px; }
+        .social-links { display:flex; gap:12px; }
+        .social-links a { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; background:rgba(255,255,255,0.08); border-radius:50%; transition:var(--transition); color:#fff; }
+        .social-links a:hover { background:var(--secondary); transform:translateY(-3px); }
+        .footer h4 { color:#fff; font-size:1.1rem; font-weight:700; margin-bottom:16px; }
+        .footer ul li { margin-bottom:10px; }
+        .footer ul a { transition:var(--transition); }
+        .footer ul a:hover { color:var(--secondary); }
+        .contact-info li { display:flex; gap:12px; align-items:flex-start; font-size:0.95rem; }
+        .contact-info li i { color:var(--secondary); margin-top:4px; min-width:20px; }
+        .footer-bottom { border-top:1px solid rgba(255,255,255,0.08); padding-top:20px; display:flex; justify-content:space-between; font-size:0.9rem; opacity:0.7; }
+
+        @media (max-width:992px) {
+            .footer-grid { grid-template-columns:1fr 1fr; }
+        }
+        @media (max-width:768px) {
+            .nav-menu { position:fixed; top:0; right:-100%; width:280px; height:100vh; background:#fff; flex-direction:column; padding:80px 32px 32px; box-shadow:-10px 0 30px rgba(0,0,0,0.1); transition:right 0.3s ease; gap:20px; }
+            .nav-menu.active { right:0; }
+            .hamburger { display:flex; z-index:1001; }
+            .hamburger.active span:nth-child(1) { transform:rotate(45deg) translate(5px,6px); }
+            .hamburger.active span:nth-child(2) { opacity:0; }
+            .hamburger.active span:nth-child(3) { transform:rotate(-45deg) translate(5px,-6px); }
+            .footer-grid { grid-template-columns:1fr; }
+            .footer-bottom { flex-direction:column; text-align:center; gap:8px; }
+            .page-hero h1 { font-size:2.2rem; }
+            .services-grid-blog { grid-template-columns:1fr; }
+        }
+        @media (max-width:480px) {
+            .why-grid { grid-template-columns:1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/Pam.jpg" alt="Codinex Computers" style="height: 45px; width: auto; vertical-align: middle; margin-right: 8px;" />
+                       
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span><span></span><span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>Our ICT Services</h1>
+            <p>Comprehensive technology solutions for individuals and businesses</p>
+        </div>
+    </section>
+
+    <section class="all-services">
+        <div class="container">
+            <div class="services-grid-blog">
+                <!-- Service 1: Hardware Repair -->
+                <div class="service-card-blog">
+                    <div class="service-image" style="background-image: url('images/tyi.jpg');"></div>
+                    <div class="service-content">
+                        <span class="service-tag"><i class="fas fa-tools"></i> Hardware</span>
+                        <h3>Computer Hardware Repair & Maintenance</h3>
+                        <p>Expert diagnosis, repair, and maintenance for desktop computers, laptops, and servers. We handle motherboard repairs, screen replacements, power supply issues, and preventive maintenance.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> Motherboard diagnostics</li>
+                            <li><i class="fas fa-check-circle"></i> Screen replacement</li>
+                            <li><i class="fas fa-check-circle"></i> Power supply repair</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Service 2: Networking -->
+                <div class="service-card-blog">
+                    <div class="service-image" style="background-image: url('images/networking.jpg');"></div>
+                    <div class="service-content">
+                        <span class="service-tag"><i class="fas fa-network-wired"></i> Networking</span>
+                        <h3>Computer Networks & Security</h3>
+                        <p>We design, implement, and secure computer networks for businesses and organizations. Our services include network setup, firewall configuration, cybersecurity assessments, and ongoing network management.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> Network design</li>
+                            <li><i class="fas fa-check-circle"></i> Firewall configuration</li>
+                            <li><i class="fas fa-check-circle"></i> Cybersecurity assessments</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Service 3: Software Development (UPDATED IMAGE) -->
+                <div class="service-card-blog">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80');"></div>
+                    <div class="service-content">
+                        <span class="service-tag"><i class="fas fa-code"></i> Development</span>
+                        <h3>Software Development</h3>
+                        <p>Custom software solutions tailored to your business needs. We develop desktop, web, and mobile applications using modern technologies to streamline your operations and improve productivity.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> Desktop applications</li>
+                            <li><i class="fas fa-check-circle"></i> Web & mobile apps</li>
+                            <li><i class="fas fa-check-circle"></i> Database management</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Service 4: IT Training -->
+                <div class="service-card-blog">
+                    <div class="service-image" style="background-image: url('images/training.jpg');"></div>
+                    <div class="service-content">
+                        <span class="service-tag"><i class="fas fa-chalkboard-teacher"></i> Training</span>
+                        <h3>IT Training & Education</h3>
+                        <p>Professional IT training programs including CCA (Certified Computer Administrator), Software Programming, Network Administration, and Business Packages like TALLY.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> CCA Certification</li>
+                            <li><i class="fas fa-check-circle"></i> Programming courses</li>
+                            <li><i class="fas fa-check-circle"></i> Network Administration</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Service 5: Web Design / Web Hosting (UPDATED IMAGE) -->
+                <div class="service-card-blog">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1547658719-da2b51169166?w=600&q=80');"></div>
+                    <div class="service-content">
+                        <span class="service-tag"><i class="fas fa-paint-brush"></i> Design</span>
+                        <h3>Website Development & Graphics Designing</h3>
+                        <p>Modern, responsive websites built with the latest technologies. We also offer professional graphic design services including logos, flyers, banners, and social media graphics.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> Responsive websites</li>
+                            <li><i class="fas fa-check-circle"></i> WordPress & CMS</li>
+                            <li><i class="fas fa-check-circle"></i> Logo & brand identity</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Service 6: Internship -->
+                <div class="service-card-blog">
+                    <div class="service-image" style="background-image: url('images/mmm.jpg');"></div>
+                    <div class="service-content">
+                        <span class="service-tag"><i class="fas fa-user-graduate"></i> Internship</span>
+                        <h3>Industrial Training / Internships</h3>
+                        <p>Hands-on ICT internship programs for students and graduates. We provide practical training in hardware, software, networking, web development, and emerging technologies like AI and Machine Learning.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> Hands-on training</li>
+                            <li><i class="fas fa-check-circle"></i> Networking exposure</li>
+                            <li><i class="fas fa-check-circle"></i> AI & Machine Learning</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-choose">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Why Codinex</span>
+                <h2>Why Choose Codinex Computers?</h2>
+            </div>
+            <div class="why-grid">
+                <div class="why-item"><i class="fas fa-star"></i><h3>12+ Years of Experience</h3><p>Since 2012, we've been delivering reliable ICT solutions in Uganda.</p></div>
+                <div class="why-item"><i class="fas fa-users"></i><h3>500+ Happy Customers</h3><p>Trusted by individuals, businesses, and organizations across East Africa.</p></div>
+                <div class="why-item"><i class="fas fa-shield-alt"></i><h3>Commitment to Integrity</h3><p>We operate with honesty, transparency, and professionalism.</p></div>
+                <div class="why-item"><i class="fas fa-microchip"></i><h3>World-Class Technology</h3><p>We stay ahead with the latest innovations in the ICT industry.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2>Need a Custom ICT Solution?</h2>
+                <p>Contact us today and let's discuss how we can help you.</p>
+                <a href="contact.html" class="btn btn-primary btn-large">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="images/Pam.jpg" alt="Codinex Computers" />
+                            <span class="logo-text">Codinex Computers</span>
+                        </a>
+                    </div>
+                    <p>Codinex Computers Limited — Uganda's ICT Centre of choice. Founded in 2012 in Mbarara.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/pages/Codinex%20Computers%20ltd/333931423341404/about/?ref"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/codinex_ug?lang=en"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/company/codinex/?skipRedirect=true"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.youtube.com/user/codinexug"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-services">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="services.html">Hardware Repair</a></li>
+                        <li><a href="services.html">Networking & Security</a></li>
+                        <li><a href="services.html">Software Development</a></li>
+                        <li><a href="services.html">IT Training</a></li>
+                        <li><a href="services.html">Web Design</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Mbarara City Mall, 2nd floor, Room 35, Mbarara, Uganda</li>
+                        <li><i class="fas fa-phone"></i> +256 701 479 173 / +256 779 146 017</li>
+                        <li><i class="fas fa-clock"></i> Mon–Fri: 8:00 AM – 5:00PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Codinex Computers Limited. All rights reserved.</p>
+                <p>Designed with <i class="fas fa-heart" style="color:#e74c3c;"></i> in Mbarara, Uganda</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+                document.querySelectorAll('.nav-menu a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

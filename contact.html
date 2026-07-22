@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact - Codinex Computers Limited</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        :root {
+            --primary: #0a3d6b; --primary-dark: #072a4a; --secondary: #00b4d8;
+            --white: #ffffff; --light-gray: #f8f9fa; --gray: #6c757d;
+            --dark: #1a1a2e; --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-hover: 0 20px 40px rgba(0,0,0,0.15); --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+        body { font-family: 'Inter', sans-serif; color: #333; line-height:1.7; background:#fff; }
+        a { text-decoration:none; color:inherit; }
+        ul { list-style:none; }
+        .container { max-width:1200px; margin:0 auto; padding:0 24px; }
+        .highlight { color:var(--secondary); }
+        .btn {
+            display:inline-flex; align-items:center; gap:10px; padding:14px 32px;
+            border-radius:50px; font-weight:600; font-size:1rem; transition:var(--transition);
+            cursor:pointer; border:none;
+        }
+        .btn-primary { background:var(--primary); color:var(--white); }
+        .btn-primary:hover { background:var(--primary-dark); transform:translateY(-3px); box-shadow:var(--shadow-hover); }
+        .btn-large { padding:16px 40px; font-size:1.1rem; }
+
+        .header { background:#fff; box-shadow:0 2px 20px rgba(0,0,0,0.08); position:sticky; top:0; z-index:1000; padding:12px 0; }
+        .navbar { display:flex; justify-content:space-between; align-items:center; }
+        .logo a { display:flex; align-items:center; gap:10px; font-weight:800; font-size:1.5rem; color:var(--primary); }
+        .logo-icon { font-size:1.8rem; color:var(--primary); }
+        .logo-text { color:var(--primary); }
+        .nav-menu { display:flex; gap:32px; align-items:center; }
+        .nav-menu a { font-weight:500; color:#333; transition:var(--transition); position:relative; padding:4px 0; }
+        .nav-menu a::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px; background:var(--secondary); transition:var(--transition); }
+        .nav-menu a:hover::after, .nav-menu a.active::after { width:100%; }
+        .nav-menu a.active { color:var(--primary); font-weight:600; }
+        .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
+        .hamburger span { display:block; width:28px; height:3px; background:var(--primary); border-radius:2px; transition:var(--transition); }
+
+        .page-hero { padding:60px 0 40px; background:linear-gradient(135deg, var(--primary), var(--primary-dark)); color:#fff; text-align:center; }
+        .page-hero h1 { font-size:2.8rem; font-weight:800; margin-bottom:8px; }
+        .page-hero p { font-size:1.15rem; opacity:0.85; }
+
+        .contact-section { padding:80px 0; background:#fff; }
+        .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; }
+        .contact-form-wrapper h2, .contact-info-wrapper h2 { font-size:1.8rem; font-weight:800; color:var(--primary); margin-bottom:8px; }
+        .contact-form-wrapper p, .contact-info-wrapper p { color:var(--gray); margin-bottom:24px; }
+        .contact-form .form-group { margin-bottom:20px; }
+        .contact-form label { display:block; font-weight:600; font-size:0.95rem; margin-bottom:6px; color:var(--primary); }
+        .contact-form input, .contact-form textarea { width:100%; padding:14px 18px; border:2px solid #e0e0e0; border-radius:8px; font-family:inherit; font-size:1rem; transition:var(--transition); background:var(--light-gray); }
+        .contact-form input:focus, .contact-form textarea:focus { outline:none; border-color:var(--secondary); background:#fff; box-shadow:0 0 0 4px rgba(0,180,216,0.1); }
+        .contact-form .btn { width:100%; justify-content:center; }
+        .form-response { margin-top:16px; padding:12px; border-radius:8px; display:none; }
+        .form-response.success { display:block; background:#d4edda; color:#155724; border:1px solid #c3e6cb; }
+        .form-response.error { display:block; background:#f8d7da; color:#721c24; border:1px solid #f5c6cb; }
+        .contact-details { display:flex; flex-direction:column; gap:24px; margin:24px 0 32px; }
+        .contact-detail { display:flex; gap:16px; align-items:flex-start; }
+        .contact-detail-icon { width:48px; height:48px; min-width:48px; background:rgba(0,180,216,0.1); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--secondary); font-size:1.2rem; }
+        .contact-detail h4 { font-weight:700; color:var(--primary); font-size:1rem; margin-bottom:2px; }
+        .contact-detail p { color:var(--gray); font-size:0.95rem; margin:0; }
+        .contact-detail a { color:var(--secondary); }
+        .social-contact h4 { font-weight:700; color:var(--primary); margin-bottom:12px; }
+        .social-links { display:flex; gap:12px; }
+        .social-links a { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; background:var(--light-gray); border-radius:50%; transition:var(--transition); color:var(--primary); }
+        .social-links a:hover { background:var(--secondary); color:#fff; transform:translateY(-3px); }
+
+        .map-section { padding:0 0 80px; background:#fff; }
+        .map-section h2 { font-size:1.8rem; font-weight:800; color:var(--primary); text-align:center; margin-bottom:24px; }
+        .map-container { border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); }
+
+        .footer { background:var(--dark); color:rgba(255,255,255,0.8); padding:60px 0 20px; }
+        .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1.5fr; gap:40px; margin-bottom:40px; }
+        .footer-about .logo { margin-bottom:16px; }
+        .footer-about .logo a { color:#fff; display:flex; align-items:center; gap:10px; }
+        .footer-about .logo img { height:40px; width:auto; }
+        .footer-about .logo .logo-text { color:#fff; font-weight:800; font-size:1.3rem; }
+        .footer-about p { font-size:0.95rem; line-height:1.7; margin-bottom:16px; }
+        .footer-about .social-links a { background:rgba(255,255,255,0.08); color:#fff; }
+        .footer-about .social-links a:hover { background:var(--secondary); }
+        .footer h4 { color:#fff; font-size:1.1rem; font-weight:700; margin-bottom:16px; }
+        .footer ul li { margin-bottom:10px; }
+        .footer ul a { transition:var(--transition); }
+        .footer ul a:hover { color:var(--secondary); }
+        .contact-info li { display:flex; gap:12px; align-items:flex-start; font-size:0.95rem; }
+        .contact-info li i { color:var(--secondary); margin-top:4px; min-width:20px; }
+        .footer-bottom { border-top:1px solid rgba(255,255,255,0.08); padding-top:20px; display:flex; justify-content:space-between; font-size:0.9rem; opacity:0.7; }
+
+        @media (max-width:992px) {
+            .contact-grid { grid-template-columns:1fr; gap:40px; }
+            .footer-grid { grid-template-columns:1fr 1fr; }
+        }
+        @media (max-width:768px) {
+            .nav-menu { position:fixed; top:0; right:-100%; width:280px; height:100vh; background:#fff; flex-direction:column; padding:80px 32px 32px; box-shadow:-10px 0 30px rgba(0,0,0,0.1); transition:right 0.3s ease; gap:20px; }
+            .nav-menu.active { right:0; }
+            .hamburger { display:flex; z-index:1001; }
+            .hamburger.active span:nth-child(1) { transform:rotate(45deg) translate(5px,6px); }
+            .hamburger.active span:nth-child(2) { opacity:0; }
+            .hamburger.active span:nth-child(3) { transform:rotate(-45deg) translate(5px,-6px); }
+            .footer-grid { grid-template-columns:1fr; }
+            .footer-bottom { flex-direction:column; text-align:center; gap:8px; }
+            .page-hero h1 { font-size:2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/Pam.jpg" alt="Codinex Computers" style="height: 45px; width: auto; vertical-align: middle; margin-right: 8px;" />
+                       
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span><span></span><span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>We'd love to hear from you — reach out to us today</p>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-form-wrapper">
+                    <h2>Send Us a Message</h2>
+                    <p>Fill in the form below and we'll get back to you shortly.</p>
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" placeholder="" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" placeholder="" />
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" placeholder="" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="5" placeholder="" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                    <div id="formResponse" class="form-response"></div>
+                </div>
+
+                <div class="contact-info-wrapper">
+                    <h2>Get in Touch</h2>
+                    <p>Visit us, call us, or reach out online.</p>
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <div class="contact-detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <h4>Our Location</h4>
+                                <p>Mbarara City Mall (Nakumatti building),<br />2nd floor, Room 35, Mbarara, Uganda</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <div class="contact-detail-icon"><i class="fas fa-phone"></i></div>
+                            <div>
+                                <h4>Phone Numbers</h4>
+                                <p>
+                                    <a href="tel:+256701479173">+256 756 198585</a><br />
+                                    <a href="tel:+256779146017">+256 7796479173</a><br />
+                                    
+                                </p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <div class="contact-detail-icon"><i class="fas fa-clock"></i></div>
+                            <div>
+                                <h4>Working Hours</h4>
+                                <p>Monday – Saturday: 8:00 AM – 5:00 PM<br />Sunday: Closed</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <div class="contact-detail-icon"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <h4>Email</h4>
+                                <p><a href="mailto:info@codinexcomputers.com">info@codinex.co.ug</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-contact">
+                        <h4>Follow Us</h4>
+                        <div class="social-links">
+                        <a href="https://www.facebook.com/pages/Codinex%20Computers%20ltd/333931423341404/about/?ref"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/codinex_ug?lang=en"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/company/codinex/?skipRedirect=true"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.youtube.com/user/codinexug"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="map-section">
+        <div class="container">
+            <h2>Find Us on the Map</h2>
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15955.123456789!2d30.6621739!3d-0.6074754!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19d91ba89a8d9b23%3A0xffca8c6e9e93f44e!2sCodinex%20Uganda!5e0!3m2!1sen!2sug!4v1234567890" 
+                    width="100%" 
+                    height="400" 
+                    style="border:0; border-radius:12px;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="images/Pam.jpg" alt="Codinex Computers" />
+                            <span class="logo-text">Codinex Computers</span>
+                        </a>
+                    </div>
+                    <p>Codinex Computers Limited — Uganda's ICT Centre of choice. Founded in 2012 in Mbarara.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/pages/Codinex%20Computers%20ltd/333931423341404/about/?ref"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/codinex_ug?lang=en"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/company/codinex/?skipRedirect=true"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.youtube.com/user/codinexug"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-services">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="services.html">Hardware Repair</a></li>
+                        <li><a href="services.html">Networking & Security</a></li>
+                        <li><a href="services.html">Software Development</a></li>
+                        <li><a href="services.html">IT Training</a></li>
+                        <li><a href="services.html">Web Design</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Mbarara City Mall, 2nd floor, Room 35, Mbarara, Uganda</li>
+                        <li><i class="fas fa-phone"></i> +256 701 479 173 / +256 779 146 017</li>
+                        <li><i class="fas fa-clock"></i> Mon–Sat: 8:00 AM – 7:30 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Codinex Computers Limited. All rights reserved.</p>
+                <p>Designed with <i class="fas fa-heart" style="color:#e74c3c;"></i> in Mbarara, Uganda</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+                document.querySelectorAll('.nav-menu a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+
+            const contactForm = document.getElementById('contactForm');
+            const formResponse = document.getElementById('formResponse');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const name = document.getElementById('name').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const subject = document.getElementById('subject').value.trim();
+                    const message = document.getElementById('message').value.trim();
+                    if (!name || !email || !subject || !message) {
+                        formResponse.textContent = 'Please fill in all required fields.';
+                        formResponse.className = 'form-response error';
+                        formResponse.style.display = 'block';
+                        return;
+                    }
+                    formResponse.textContent = 'Thank you! Your message has been sent successfully. We\'ll get back to you shortly.';
+                    formResponse.className = 'form-response success';
+                    formResponse.style.display = 'block';
+                    contactForm.reset();
+                    setTimeout(() => { formResponse.style.display = 'none'; }, 8000);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About - Codinex Computers Limited</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        :root {
+            --primary: #0a3d6b; --primary-dark: #072a4a; --secondary: #00b4d8;
+            --white: #ffffff; --light-gray: #f8f9fa; --gray: #6c757d;
+            --dark: #1a1a2e; --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-hover: 0 20px 40px rgba(0,0,0,0.15); --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+        body { font-family: 'Inter', sans-serif; color: #333; line-height:1.7; background:#fff; }
+        a { text-decoration:none; color:inherit; }
+        ul { list-style:none; }
+        .container { max-width:1200px; margin:0 auto; padding:0 24px; }
+        .section-header { text-align:center; margin-bottom:48px; }
+        .section-tag {
+            display:inline-block; font-size:0.8rem; font-weight:600; text-transform:uppercase;
+            letter-spacing:2px; color:var(--secondary); background:rgba(0,180,216,0.1);
+            padding:4px 16px; border-radius:20px; margin-bottom:12px;
+        }
+        .section-header h2 { font-size:2.2rem; font-weight:800; color:var(--primary); margin-bottom:12px; }
+        .section-header p { font-size:1.1rem; color:var(--gray); max-width:600px; margin:0 auto; }
+        .highlight { color:var(--secondary); }
+        .text-center { text-align:center; }
+        .btn {
+            display:inline-flex; align-items:center; gap:10px; padding:14px 32px;
+            border-radius:50px; font-weight:600; font-size:1rem; transition:var(--transition);
+            cursor:pointer; border:none;
+        }
+        .btn-primary { background:var(--primary); color:var(--white); }
+        .btn-primary:hover { background:var(--primary-dark); transform:translateY(-3px); box-shadow:var(--shadow-hover); }
+        .btn-large { padding:16px 40px; font-size:1.1rem; }
+
+        /* Header */
+        .header { background:#fff; box-shadow:0 2px 20px rgba(0,0,0,0.08); position:sticky; top:0; z-index:1000; padding:12px 0; }
+        .navbar { display:flex; justify-content:space-between; align-items:center; }
+        .logo a { display:flex; align-items:center; gap:10px; font-weight:800; font-size:1.5rem; color:var(--primary); }
+        .logo-icon { font-size:1.8rem; color:var(--primary); }
+        .logo-text { color:var(--primary); }
+        .nav-menu { display:flex; gap:32px; align-items:center; }
+        .nav-menu a { font-weight:500; color:#333; transition:var(--transition); position:relative; padding:4px 0; }
+        .nav-menu a::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px; background:var(--secondary); transition:var(--transition); }
+        .nav-menu a:hover::after, .nav-menu a.active::after { width:100%; }
+        .nav-menu a.active { color:var(--primary); font-weight:600; }
+        .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
+        .hamburger span { display:block; width:28px; height:3px; background:var(--primary); border-radius:2px; transition:var(--transition); }
+
+        /* Page Hero */
+        .page-hero { padding:60px 0 40px; background:linear-gradient(135deg, var(--primary), var(--primary-dark)); color:#fff; text-align:center; }
+        .page-hero h1 { font-size:2.8rem; font-weight:800; margin-bottom:8px; }
+        .page-hero p { font-size:1.15rem; opacity:0.85; }
+
+        /* About Story */
+        .about-story { padding:80px 0; background:#fff; }
+        .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+        .about-text h2 { font-size:2.2rem; font-weight:800; color:var(--primary); margin-bottom:20px; }
+        .about-text p { font-size:1.05rem; color:var(--gray); margin-bottom:16px; }
+        .about-highlights { display:flex; gap:24px; margin-top:24px; flex-wrap:wrap; }
+        .highlight-item { display:flex; align-items:center; gap:10px; background:var(--light-gray); padding:8px 20px; border-radius:30px; font-weight:600; color:var(--primary); }
+        .highlight-item i { color:var(--secondary); }
+        .about-image img { width:100%; border-radius:var(--radius); box-shadow:var(--shadow); }
+
+        /* Mission Vision */
+        .mission-vision { padding:80px 0; background:var(--primary); color:#fff; }
+        .mv-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; }
+        .mv-card { padding:40px; background:rgba(255,255,255,0.08); border-radius:var(--radius); text-align:center; }
+        .mv-icon { font-size:3rem; color:var(--secondary); margin-bottom:16px; }
+        .mv-card h3 { font-size:1.6rem; font-weight:700; margin-bottom:16px; }
+        .mv-card p { font-size:1.05rem; line-height:1.8; opacity:0.95; }
+        .mv-card strong { color:var(--secondary); }
+
+        /* Values */
+        .values-detail { padding:80px 0; background:var(--light-gray); }
+        .values-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:24px; }
+        .value-card { text-align:center; padding:32px 20px; background:#fff; border-radius:var(--radius); transition:var(--transition); }
+        .value-card:hover { transform:translateY(-5px); box-shadow:var(--shadow); }
+        .value-icon { font-size:2.5rem; color:var(--secondary); margin-bottom:16px; }
+        .value-card h3 { font-size:1.1rem; font-weight:700; color:var(--primary); margin-bottom:8px; }
+        .value-card p { font-size:0.95rem; color:var(--gray); }
+
+        /* Objectives */
+        .objectives { padding:80px 0; background:#fff; }
+        .objectives-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:30px; }
+        .objective-item { background:var(--light-gray); padding:32px 24px; border-radius:var(--radius); border-left:4px solid var(--secondary); transition:var(--transition); }
+        .objective-item:hover { box-shadow:var(--shadow); transform:translateY(-4px); }
+        .objective-number { font-size:2.5rem; font-weight:800; color:rgba(0,180,216,0.2); display:block; margin-bottom:8px; }
+        .objective-item h3 { font-size:1.1rem; font-weight:700; color:var(--primary); margin-bottom:8px; }
+        .objective-item p { color:var(--gray); font-size:0.95rem; }
+
+        /* Leadership / Team */
+        .leadership { padding:80px 0; background:var(--light-gray); }
+        .team-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:30px; }
+        .team-card {
+            background:#fff;
+            border-radius:var(--radius);
+            padding:32px 20px;
+            text-align:center;
+            transition:var(--transition);
+            box-shadow:0 4px 12px rgba(0,0,0,0.05);
+        }
+        .team-card:hover { transform:translateY(-8px); box-shadow:var(--shadow-hover); }
+        .team-card .team-avatar {
+            width:120px;
+            height:120px;
+            border-radius:50%;
+            object-fit:cover;
+            margin:0 auto 16px;
+            border:4px solid var(--secondary);
+            display:block;
+        }
+        .team-card h3 { font-size:1.2rem; font-weight:700; color:var(--primary); margin-bottom:4px; }
+        .team-card .team-role {
+            font-size:0.95rem;
+            color:var(--secondary);
+            font-weight:600;
+            margin-bottom:8px;
+        }
+        .team-card p { font-size:0.9rem; color:var(--gray); }
+
+        /* CTA */
+        .cta-section { padding:60px 0; background:var(--light-gray); }
+        .cta-box { background:linear-gradient(135deg, var(--primary), var(--primary-dark)); padding:60px 40px; border-radius:var(--radius); text-align:center; color:#fff; }
+        .cta-box h2 { font-size:2.2rem; font-weight:800; margin-bottom:12px; }
+        .cta-box p { font-size:1.1rem; opacity:0.9; max-width:500px; margin:0 auto 24px; }
+        .cta-box .btn-primary { background:#fff; color:var(--primary); }
+        .cta-box .btn-primary:hover { background:var(--secondary); color:#fff; }
+
+        /* Footer */
+        .footer { background:var(--dark); color:rgba(255,255,255,0.8); padding:60px 0 20px; }
+        .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1.5fr; gap:40px; margin-bottom:40px; }
+        .footer-about .logo { margin-bottom:16px; }
+        .footer-about .logo a { color:#fff; display:flex; align-items:center; gap:10px; }
+        .footer-about .logo img { height:40px; width:auto; }
+        .footer-about .logo .logo-text { color:#fff; font-weight:800; font-size:1.3rem; }
+        .footer-about p { font-size:0.95rem; line-height:1.7; margin-bottom:16px; }
+        .social-links { display:flex; gap:12px; }
+        .social-links a { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; background:rgba(255,255,255,0.08); border-radius:50%; transition:var(--transition); color:#fff; }
+        .social-links a:hover { background:var(--secondary); transform:translateY(-3px); }
+        .footer h4 { color:#fff; font-size:1.1rem; font-weight:700; margin-bottom:16px; }
+        .footer ul li { margin-bottom:10px; }
+        .footer ul a { transition:var(--transition); }
+        .footer ul a:hover { color:var(--secondary); }
+        .contact-info li { display:flex; gap:12px; align-items:flex-start; font-size:0.95rem; }
+        .contact-info li i { color:var(--secondary); margin-top:4px; min-width:20px; }
+        .footer-bottom { border-top:1px solid rgba(255,255,255,0.08); padding-top:20px; display:flex; justify-content:space-between; font-size:0.9rem; opacity:0.7; }
+
+        @media (max-width:992px) {
+            .about-grid { grid-template-columns:1fr; gap:40px; }
+            .mv-grid { grid-template-columns:1fr; }
+            .footer-grid { grid-template-columns:1fr 1fr; }
+        }
+        @media (max-width:768px) {
+            .nav-menu { position:fixed; top:0; right:-100%; width:280px; height:100vh; background:#fff; flex-direction:column; padding:80px 32px 32px; box-shadow:-10px 0 30px rgba(0,0,0,0.1); transition:right 0.3s ease; gap:20px; }
+            .nav-menu.active { right:0; }
+            .hamburger { display:flex; z-index:1001; }
+            .hamburger.active span:nth-child(1) { transform:rotate(45deg) translate(5px,6px); }
+            .hamburger.active span:nth-child(2) { opacity:0; }
+            .hamburger.active span:nth-child(3) { transform:rotate(-45deg) translate(5px,-6px); }
+            .footer-grid { grid-template-columns:1fr; }
+            .footer-bottom { flex-direction:column; text-align:center; gap:8px; }
+            .page-hero h1 { font-size:2.2rem; }
+            .values-grid { grid-template-columns:1fr 1fr; }
+            .objectives-grid { grid-template-columns:1fr; }
+            .team-grid { grid-template-columns:1fr 1fr; }
+        }
+        @media (max-width:480px) {
+            .values-grid { grid-template-columns:1fr; }
+            .team-grid { grid-template-columns:1fr; }
+            .about-highlights { flex-direction:column; align-items:flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/Pam.jpg" alt="Codinex Computers" style="height: 45px; width: auto; vertical-align: middle; margin-right: 8px;" />
+                       
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span><span></span><span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>About Codinex Computers Limited</h1>
+            <p>Uganda's trusted ICT partner since 2012</p>
+        </div>
+    </section>
+
+    <section class="about-story">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <span class="section-tag">Our Story</span>
+                    <h2>Empowering Uganda Through Technology</h2>
+                    <p><strong>Codinex Computers Limited</strong> is an Information and Communication Technology (ICT) company located in Mbarara City, Uganda. The company was founded in <strong>2012</strong> by a team of dynamic Information Technology professionals and computer engineers.</p>
+                    <p>Registered under the Registrar of Companies with <strong>Registration Number 152279</strong>, Codinex has built a strong reputation for providing reliable, innovative, and customer-oriented ICT solutions to individuals, businesses, and organizations across Uganda and the East African region.</p>
+                    <p>With over <strong>500 customers</strong> benefiting from our networking, cybersecurity, software development, and computer maintenance services, we continue to be a leading ICT company in Western Uganda.</p>
+                    <div class="about-highlights">
+                        <div class="highlight-item"><i class="fas fa-calendar-check"></i> Founded 2012</div>
+                        <div class="highlight-item"><i class="fas fa-users"></i> 500+ Customers</div>
+                        <div class="highlight-item"><i class="fas fa-award"></i> Leading in Western Uganda</div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="images/networking.jpg" alt="Codinex Computers Office" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mission-vision">
+        <div class="container">
+            <div class="mv-grid">
+                <div class="mv-card mission">
+                    <div class="mv-icon"><i class="fas fa-bullseye"></i></div>
+                    <h3>Our Mission</h3>
+                    <p>To sustain Integrity, Professionalism, Customer satisfaction, Computer and business ethics as the foundation of our relationship with our stakeholders, customers, suppliers, employees, shareholders, and the community.</p>
+                </div>
+                <div class="mv-card vision">
+                    <div class="mv-icon"><i class="fas fa-eye"></i></div>
+                    <h3>Our Vision</h3>
+                    <p>To become Uganda's ICT Centre of choice by committing to <strong>world-class technology</strong>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="values-detail">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Our DNA</span>
+                <h2>Core Values</h2>
+            </div>
+            <div class="values-grid">
+                <div class="value-card"><div class="value-icon"><i class="fas fa-medal"></i></div><h3>Commitment to Excellence</h3><p>We deliver high-quality ICT products and services while continuously improving our technical skills and service standards.</p></div>
+                <div class="value-card"><div class="value-icon"><i class="fas fa-users"></i></div><h3>Diversity</h3><p>We embrace different perspectives and backgrounds, promoting industrial advancement and research excellence.</p></div>
+                <div class="value-card"><div class="value-icon"><i class="fas fa-lightbulb"></i></div><h3>Innovation</h3><p>We push the boundaries of technology with creative solutions and forward-thinking approaches.</p></div>
+                <div class="value-card"><div class="value-icon"><i class="fas fa-handshake"></i></div><h3>Integrity</h3><p>We operate with honesty, transparency, and ethical conduct in all our dealings with stakeholders.</p></div>
+                <div class="value-card"><div class="value-icon"><i class="fas fa-people-arrows"></i></div><h3>Teamwork</h3><p>We collaborate effectively, combining our strengths to deliver exceptional results for our customers.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LEADERSHIP / TEAM SECTION ===== -->
+    <section class="leadership">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Our Team</span>
+                <h2>Meet Our Leadership</h2>
+                <p>Dedicated professionals committed to delivering excellence in ICT.</p>
+            </div>
+            <div class="team-grid">
+                <!-- Managing Director -->
+                <div class="team-card">
+                    <img src="images/manager.jpg" alt="Managing Director" class="team-avatar" />
+                    <h3> Eng Ainamazima Yoaz</h3>
+                    <div class="team-role">Managing Director</div>
+                    <p>20+ years of experience in ICT leadership, driving innovation and growth across East Africa.</p>
+                </div>
+                <!-- IT Technician -->
+                <div class="team-card">
+                    <img src="images/techician.jpg" alt="IT Technician" class="team-avatar" />
+                    <h3>Ndyanabangi Tomson</h3>
+                    <div class="team-role">IT Technician</div>
+                    <p>Expert in hardware repair, network troubleshooting, and system maintenance with 10+ years experience.</p>
+                </div>
+                <!-- Help Desk -->
+                <div class="team-card">
+                    <img src="images/helpdesk.jpg" alt="Help Desk" class="team-avatar" />
+                    <h3>Nsiimenta Irene</h3>
+                    <div class="team-role">Help Desk Support</div>
+                    <p>Customer-focused IT support specialist ensuring quick resolution of all technical issues.</p>
+                </div>
+                <!-- Supporting Staff -->
+                <div class="team-card">
+                    <img src="images/supporting st.jpg" alt="Supporting Staff" class="team-avatar" />
+                    <h3>Twongirwe Edwin</h3>
+                    <div class="team-role">Supporting Staff</div>
+                    <p>Administrative and operational support keeping our daily operations running smoothly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="objectives">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Our Goals</span>
+                <h2>Organizational Objectives</h2>
+            </div>
+            <div class="objectives-grid">
+                <div class="objective-item"><span class="objective-number">01</span><h3>Vendor Certified Education</h3><p>To become a vendor certified international standard IT education provider.</p></div>
+                <div class="objective-item"><span class="objective-number">02</span><h3>Advanced IT Education</h3><p>To attain advanced IT education standards for our students and clients.</p></div>
+                <div class="objective-item"><span class="objective-number">03</span><h3>Corporate IT Education</h3><p>To provide comprehensive corporate IT education solutions.</p></div>
+                <div class="objective-item"><span class="objective-number">04</span><h3>Customized Training</h3><p>To customize IT training services to meet specific client needs.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2>Join Our Growing Family</h2>
+                <p>Become one of over 500 satisfied customers today.</p>
+                <a href="contact.html" class="btn btn-primary btn-large">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="images/Pam.jpg" alt="Codinex Computers" />
+                            <span class="logo-text">Codinex Computers</span>
+                        </a>
+                    </div>
+                    <p>Codinex Computers Limited — Uganda's ICT Centre of choice. Founded in 2012 in Mbarara.</p>
+                    <div class="social-links">
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/pages/Codinex%20Computers%20ltd/333931423341404/about/?ref"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://x.com/codinex_ug?lang=en"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.linkedin.com/company/codinex/?skipRedirect=true"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.youtube.com/user/codinexug"><i class="fab fa-youtube"></i></a>
+                        </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-services">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="services.html">Hardware Repair</a></li>
+                        <li><a href="services.html">Networking & Security</a></li>
+                        <li><a href="services.html">Software Development</a></li>
+                        <li><a href="services.html">IT Training</a></li>
+                        <li><a href="services.html">Web Design</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Mbarara City Mall, 2nd floor, Room 35, Mbarara, Uganda</li>
+                        <li><i class="fas fa-phone"></i> +256 701 479 173 / +256 779 146 017</li>
+                        <li><i class="fas fa-clock"></i> Mon–Fri: 8:00 AM – 5:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Codinex Computers Limited. All rights reserved.</p>
+                <p>Designed with <i class="fas fa-heart" style="color:#e74c3c;"></i> in Mbarara, Uganda</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+                document.querySelectorAll('.nav-menu a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
